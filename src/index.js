@@ -109,7 +109,7 @@ export default function Loadable<Props: {}, Err: Error>(opts: Options) {
 
       load().then(() => {
         if (!this._mounted) return;
-        clearTimeout(this._timeout);
+        // clearTimeout(this._timeout);
         this.setState({
           error: outsideError,
           pastDelay: false,
@@ -126,7 +126,7 @@ export default function Loadable<Props: {}, Err: Error>(opts: Options) {
     render() {
       let { pastDelay, error, Component } = this.state;
 
-      if (isLoading || error) {
+      if (isLoading || !pastDelay || error) {
         return (
           <LoadingComponent
             isLoading={isLoading}
